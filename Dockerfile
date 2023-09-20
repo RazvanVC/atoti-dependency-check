@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM python:3.9.12-slim AS builder
+FROM python:3.12.0rc2-slim AS builder
 
 RUN --mount=type=cache,target=/root/.cache pip install poetry==1.3.1
 RUN poetry config virtualenvs.create false
@@ -8,7 +8,7 @@ COPY poetry.lock pyproject.toml ./
 
 RUN --mount=type=cache,target=/root/.cache poetry install --no-root --only main --sync
 
-FROM python:3.9.12-slim AS runner
+FROM python:3.12.0rc2-slim AS runner
 
 ENV ATOTI_HIDE_EULA_MESSAGE=true
 ENV PORT=80
